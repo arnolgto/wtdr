@@ -67,8 +67,8 @@ def my_task():
 
 
 
-# schedule the task to run every day at 19.00PM
-schedule.every().day.at("17:17").do(my_task)
+# schedule the task to run every day at 7.15AM singapure
+schedule.every().day.at("7:17").do(my_task)
 
 
 while True:
