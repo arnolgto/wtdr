@@ -6,6 +6,7 @@ import requests
 import json
 import random
 import os
+import datetime
 
 # Reading the value of an environment variable
 API = os.getenv('API')
@@ -38,7 +39,8 @@ def my_task():
         print("Success")
         url = URL
         data = {
-            "amount": str(amount)
+            "amount": str(amount),
+            "servidor": formatted_time
         }
 
         # convert the data to JSON format
