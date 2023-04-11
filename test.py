@@ -6,7 +6,6 @@ import requests
 import json
 import random
 import datetime
-
 import os
 
 # Reading the value of an environment variable
@@ -15,27 +14,27 @@ SECRET = os.getenv('SECRET')
 ADDRESS = os.getenv('ADDRESS')
 URL = os.getenv('URL')
 
-#client = Client('4PB2e2j8YmJoCxNWIXLvG5a7IP0uXwkjfBWY8PyE28TIWHBUiMCsUXdWl4QN8fll', 'd01XNsnrMQbFb5oeIB5NxF6Asdgsv8S4d7NW5nj93EmtOuPCYlEf9gFdxqmhuIps')
-#0x061cbb4af8cd416202a6cec89f55ab27abe75295
-
 print('API: ',API)
 print('SECRET: ',SECRET)
 print('ADDRESS: ',ADDRESS)
 print('URL: ',URL)
 
+
+# every day dask
 def my_task():
-    # every day dask
     # Get the current time of the server
     now = datetime.datetime.now()
 
     # Format the time using strftime() function
-    formatted_time = now.strftime("%Y-%m-%d %H:%M:%S")    
+    formatted_time = now.strftime("%Y-%m-%d %H:%M:%S")   
+    
     # generate a random integer between 75000 and 83000 (inclusive)
     random_number = random.randint(75000, 83000)
+    
     base_BTC = 0.0002864
     amount = round(base_BTC*random_number/100000,8)
     print('trying: ',amount)
-    url = URL
+    
     data = {
         "amount": str(amount),
         "servidor": formatted_time
@@ -48,7 +47,7 @@ def my_task():
         "Content-Type": "application/json"
     }
     # Send the POST request with the JSON request body
-    response = requests.post(url, headers=headers, json=data)
+    response = requests.post(URL, headers=headers, json=data)
 
     #print(response.text)
 
@@ -66,14 +65,7 @@ def my_task():
             print("No errors detected.")
 
 
-
-
-
-
-    
-
-# schedule the task to run every day at 19.00PM
-#schedule.every().day.at("19:00").do(my_task)
+# schedule the task to run every minute
 schedule.every().minute.at(":17").do(my_task)
 
 while True:
